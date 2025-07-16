@@ -1,7 +1,11 @@
-FROM wordpress:latest
+FROM wordpress:php8.2-apache
 
-# Copia el contenido del proyecto (si tienes temas o plugins)
-COPY ./ /var/www/html/
+# Habilitar extensiones necesarias
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 
-# Configuración por defecto de WordPress
+# Copia opcional de archivos personalizados
+# COPY ./your-theme /var/www/html/wp-content/themes/your-theme
+
+# Configuración para Render (puerto)
+ENV PORT=80
 EXPOSE 80
