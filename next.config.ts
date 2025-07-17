@@ -1,6 +1,6 @@
 const nextConfig = {
-  poweredByHeader: false,
-  productionBrowserSourceMaps: false,
+  poweredByHeader: false, // Oculta cabecera X-Powered-By
+  productionBrowserSourceMaps: false, // Evita exponer código en producción
   async headers() {
     return [
       {
@@ -14,12 +14,13 @@ const nextConfig = {
           { key: "X-XSS-Protection", value: "1; mode=block" },
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';"
-          },
-        ],
-      },
+            value:
+              "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; object-src 'none'; base-uri 'self';"
+          }
+        ]
+      }
     ];
-  },
+  }
 };
 
 module.exports = nextConfig;
