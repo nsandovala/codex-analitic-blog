@@ -1,33 +1,25 @@
 import fs from "fs";
 import path from "path";
 import Markdown from "react-markdown";
+import Link from "next/link";
 
-interface ArticlePageProps {
+export default async function ArticlePage({
+  params,
+}: {
   params: { slug: string };
-}
-
-// ✅ Generar rutas estáticas
-export async function generateStaticParams() {
-  const files = fs.readdirSync(path.join(process.cwd(), "src", "app", "content"));
-  return files.map((filename) => ({
-    slug: filename.replace(".md", ""),
-  }));
-}
-
-// ✅ Página dinámica
-export default function ArticlePage({ params }: ArticlePageProps) {
+}) {
   const filePath = path.join(process.cwd(), "src", "app", "content", `${params.slug}.md`);
 
   if (!fs.existsSync(filePath)) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center bg-gray-900 text-white p-8">
-        <h1 className="text-red-500 text-3xl font-bold mb-4">⚠ Artículo no encontrado</h1>
-        <a
+      <div className="text-center text-red-500 mt-10">
+        <h1>Artículo no encontrado</h1>
+        <Link
           href="/"
-          className="inline-block bg-yellow-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-yellow-400 hover:scale-105 transition-transform duration-300"
+          className="inline-block mt-4 bg-yellow-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-yellow-400 hover:scale-105 transition-transform duration-300"
         >
-          Volver al inicio
-        </a>
+          ← Volver al inicio
+        </Link>
       </div>
     );
   }
@@ -37,16 +29,20 @@ export default function ArticlePage({ params }: ArticlePageProps) {
   return (
     <main className="min-h-screen bg-gray-900 text-white px-6 py-12">
       <div className="max-w-3xl mx-auto animate-fadeIn">
+        <h1 className="text-yellow-400 text-4xl font-extrabold mb-6 drop-shadow-lg">
+          Artículo Destacado
+        </h1>
         <article className="prose prose-invert prose-lg text-center leading-relaxed">
           <Markdown>{content}</Markdown>
         </article>
+
         <div className="text-center mt-10">
-          <a
+          <Link
             href="/"
             className="inline-block bg-yellow-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-yellow-400 hover:scale-105 transition-transform duration-300"
           >
             ← Volver al inicio
-          </a>
+          </Link>
         </div>
       </div>
     </main>
