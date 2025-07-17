@@ -8,7 +8,7 @@ interface PageProps {
   };
 }
 
-// Genera rutas estáticas
+// ✅ Genera rutas estáticas para los artículos
 export async function generateStaticParams() {
   const files = fs.readdirSync(path.join(process.cwd(), "src", "app", "content"));
   return files.map((filename) => ({
@@ -16,12 +16,22 @@ export async function generateStaticParams() {
   }));
 }
 
-// Página dinámica
+// ✅ Página dinámica que renderiza el contenido del Markdown
 export default function ArticlePage({ params }: PageProps) {
   const filePath = path.join(process.cwd(), "src", "app", "content", `${params.slug}.md`);
 
   if (!fs.existsSync(filePath)) {
-    return <div className="text-center text-red-500 mt-10">⚠ Artículo no encontrado</div>;
+    return (
+      <main className="min-h-screen bg-gray-900 text-white flex flex-col justify-center items-center">
+        <h1 className="text-2xl text-red-500 font-bold">⚠ Artículo no encontrado</h1>
+        <a
+          href="/"
+          className="mt-6 inline-block bg-yellow-500 text-white font-semibold px-6 py-3 rounded-full shadow hover:bg-yellow-400 transition-transform duration-300"
+        >
+          ← Volver al inicio
+        </a>
+      </main>
+    );
   }
 
   const content = fs.readFileSync(filePath, "utf-8");
