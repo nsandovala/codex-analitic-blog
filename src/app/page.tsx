@@ -1,30 +1,26 @@
-import Link from "next/link";
+import fs from "fs";
+import path from "path";
 
-export default function Home() {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default function Article({ params }: PageProps) {
+  const filePath = path.join(process.cwd(), "src", "app", "content", `${params.slug}.md`);
+
+  if (!fs.existsSync(filePath)) {
+    return <div>Artículo no encontrado</div>;
+  }
+
+  const content = fs.readFileSync(filePath, "utf-8");
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen text-center px-4 bg-dark">
-      {/* Título */}
-      <h1 className="text-5xl md:text-7xl font-extrabold text-yellow-400 tracking-wide drop-shadow-lg mt-4">
-        Método Learning Loop
-      </h1>
-
-      {/* Subtítulo */}
-      <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mt-4 mb-8">
-        <strong>Códex que rompe paradigmas.</strong> Investigaciones y análisis que desafían la lógica.
-        <span className="block text-gray-300 text-lg max-w-2xl mx-auto mt-4">
-          Un código enigma moderno, alimentado con datos científicos reales.
-        </span>
-        Descubre cómo la lógica, la evidencia y codex enigma desnudan los patrones
-        que los poderosos no quieren que entiendas. Sin ideologías, solo verdad.
-      </p>
-
-      {/* Botón estilo Apple */}
-      <Link
-        href="/articulos/metodo-learning-loop"
-        className="inline-block bg-yellow-500 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-yellow-400 hover:scale-105 transition-transform duration-300 mt-8"
-      >
-        Leer artículo →
-      </Link>
+    <main className="min-h-screen bg-gray-900 text-white px-6 py-12">
+      <div className="max-w-3xl mx-auto animate-fadeIn">
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
     </main>
   );
 }
