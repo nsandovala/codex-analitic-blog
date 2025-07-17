@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ajuste Markdown */
+.prose-invert {
+  color: #fff;
+}
+
+/* Variables */
+:root {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
+/* Animación suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeIn { animation: fadeIn 1.2s ease-in-out forwards; }
+
+/* Divider minimalista */
+.divider {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, #FFD700, transparent);
+  margin: 1.5rem 0;
+  border-radius: 2px;
+}
+
+/* Botón elegante */
+.btn {
+  background: #FFC107;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: #FFB300;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+
+/* Fondo */
+body {
+  background-color: #0A0F1E;
+  background-image: url('/binary-bg.svg');
+  background-size: 200px;
+  background-repeat: repeat;
+  background-attachment: fixed;
+}
