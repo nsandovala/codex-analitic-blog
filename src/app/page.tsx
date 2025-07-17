@@ -14,8 +14,8 @@ export default function Home() {
         <span className="block text-gray-300 text-lg max-w-2xl mx-auto mt-4">
           Un código enigma moderno, alimentado con datos científicos reales.
         </span>
-        Descubre cómo la lógica, la evidencia y codex enigma desnudan los patrones
-        que los poderosos no quieren que entiendas. Sin ideologías, solo verdad.
+        Descubre cómo la lógica, la evidencia y codex enigma desnudan los patrones que los poderosos no quieren que entiendas.
+        Sin ideologías, solo verdad.
       </p>
 
       {/* Botón estilo Apple */}
