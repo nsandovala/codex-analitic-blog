@@ -23,19 +23,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // Añade esto en _app.tsx o layout.tsx
-useEffect(() => {
-  if (window.location.protocol !== 'https:') {
-    window.location.href = 'https://' + window.location.host + window.location.pathname;
-  }
-}, []);
-
-   <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-  <body className="bg-gray-900 text-white antialiased">
-    <div className="min-h-screen">{children}</div>
-  </body>
-</html>
-
+    <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen antialiased flex items-center justify-center">
+        <div className="w-full">{children}</div>
+      </body>
+    </html>
   );
 }
-// This file is used to define the root layout of the application,
