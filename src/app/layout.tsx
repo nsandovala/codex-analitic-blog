@@ -23,6 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    // Añade esto en _app.tsx o layout.tsx
+useEffect(() => {
+  if (window.location.protocol !== 'https:') {
+    window.location.href = 'https://' + window.location.host + window.location.pathname;
+  }
+}, []);
+
    <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
   <body className="bg-gray-900 text-white antialiased">
     <div className="min-h-screen">{children}</div>
