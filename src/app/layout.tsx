@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { useEffect } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,15 +18,17 @@ export const metadata: Metadata = {
   description: "Investigaciones y análisis disruptivos",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.protocol !== "https:") {
+      window.location.href = `https://${window.location.host}${window.location.pathname}`;
+    }
+  }, []);
+
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen antialiased flex items-center justify-center">
-        <div className="w-full">{children}</div>
+      <body className="bg-gray-900 text-white antialiased">
+        <div className="min-h-screen">{children}</div>
       </body>
     </html>
   );
