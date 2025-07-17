@@ -1,14 +1,23 @@
 import fs from "fs";
 import path from "path";
 
+interface ArticleParams {
+  params: {
+    slug: string;
+  };
+}
+
+// ✅ Generar rutas estáticas
 export async function generateStaticParams() {
   const files = fs.readdirSync(path.join(process.cwd(), "src", "app", "content"));
+
   return files.map((filename) => ({
     slug: filename.replace(".md", ""),
   }));
 }
 
-export default async function Article({ params }: { params: { slug: string } }) {
+// ✅ Página dinámica
+export default async function Article({ params }: ArticleParams) {
   const filePath = path.join(process.cwd(), "src", "app", "content", `${params.slug}.md`);
 
   if (!fs.existsSync(filePath)) {
