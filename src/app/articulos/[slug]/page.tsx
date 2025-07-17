@@ -17,7 +17,6 @@ export default function Article({ content }: PageProps) {
   );
 }
 
-// Genera las rutas dinámicas
 export const getStaticPaths: GetStaticPaths = async () => {
   const files = fs.readdirSync(path.join(process.cwd(), "src", "app", "content"));
 
@@ -27,11 +26,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false, // muestra 404 si no existe
+    fallback: false,
   };
 };
 
-// Genera contenido dinámico
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string;
   const filePath = path.join(process.cwd(), "src", "app", "content", `${slug}.md`);
