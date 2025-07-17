@@ -1,13 +1,28 @@
 import fs from "fs";
 import path from "path";
-import { GetStaticProps, GetStaticPaths } from "next";
 
-interface PageProps {
-  slug: string;
-  content: string;
+interface Props {
+  params: {
+    slug: string;
+  };
 }
 
-export default function Article({ content }: PageProps) {
+// ✅ Nueva API para rutas dinámicas en App Router
+export async function generateStaticParams() {
+  const files = fs.readdirSync(path.join(process.cwd(), "src", "app", "content"));
+  return files.map((filename) => ({
+    slug: filename.replace(".md", ""),
+  }));
+}
+
+export default function Article({ params }: Props) {
+  const filePath = path.join(process.cwd(), "src", "app", "content", `${params.slug}.md`);
+  if (!fs.existsSync(filePath)) {
+    return <div>Artículo no encontrado</div>;
+  }
+
+  const content = fs.readFileSync(filePath, "utf-8");
+
   return (
     <main className="min-h-screen bg-gray-900 text-white px-6 py-12">
       <div className="max-w-3xl mx-auto animate-fadeIn">
@@ -16,30 +31,3 @@ export default function Article({ content }: PageProps) {
     </main>
   );
 }
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const files = fs.readdirSync(path.join(process.cwd(), "src", "app", "content"));
-
-  const paths = files.map((filename) => ({
-    params: { slug: filename.replace(".md", "") },
-  }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const slug = params?.slug as string;
-  const filePath = path.join(process.cwd(), "src", "app", "content", `${slug}.md`);
-
-  const content = fs.readFileSync(filePath, "utf-8");
-
-  return {
-    props: {
-      slug,
-      content,
-    },
-  };
-};
