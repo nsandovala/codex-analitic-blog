@@ -11,10 +11,10 @@ export default function Home() {
       {/* Subtítulo */}
       <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mt-4 mb-8">
         <strong>Códex que rompe paradigmas.</strong> Investigaciones y análisis que desafían la lógica.
-        <span className="block text-gray-300 text-lg max-w-2xl mx-auto mt-4">
+        <span className="block text-gray-300 text-lg max-w-xl mx-auto mt-4">
           Un código enigma moderno, alimentado con datos científicos reales.
         </span>
-        Descubre cómo la lógica, la evidencia y codex enigma desnudan los patrones que los poderosos no quieren que entiendas.
+        Descubre cómo la lógica, la evidencia y códex enigma desnudan los patrones que los poderosos no quieren que entiendas.  
         Sin ideologías, solo verdad.
       </p>
 
