@@ -1,10 +1,11 @@
 {
-  "name": "codex-analitic-blog",
+  "name": "codex-analitic",
   "version": "1.0.0",
+  "description": "Codex Analitic Blog",
   "scripts": {
-    "start": "serve ."
+    "start": "npx serve ."
   },
   "dependencies": {
-    "serve": "^14.0.0"
+    "serve": "^14.2.0"
   }
 }
