@@ -1,4 +1,94 @@
+/* General */
 body {
+    margin: 0;
+    padding: 0;
+    background: url('tu-imagen-4k.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    color: #00ff88;
+    text-align: center;
+}
+
+/* Fondo oscuro + overlay */
+.overlay {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+/* Texto Glitch */
+.glitch {
+    font-size: 3rem;
+    position: relative;
+    text-transform: uppercase;
+    animation: flicker 1.5s infinite alternate;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+}
+
+.glitch::before {
+    color: #ff0044;
+    transform: translate(2px, -2px);
+    clip: rect(0, 900px, 0, 0);
+    animation: glitchTop 1.5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    color: #00ccff;
+    transform: translate(-2px, 2px);
+    clip: rect(0, 900px, 0, 0);
+    animation: glitchBottom 1.5s infinite linear alternate-reverse;
+}
+
+/* Animaciones glitch */
+@keyframes glitchTop {
+    0% { clip: rect(0, 900px, 0, 0); }
+    50% { clip: rect(0, 900px, 90px, 0); }
+    100% { clip: rect(0, 900px, 0, 0); }
+}
+
+@keyframes glitchBottom {
+    0% { clip: rect(0, 900px, 0, 0); }
+    50% { clip: rect(0, 900px, 90px, 0); }
+    100% { clip: rect(0, 900px, 0, 0); }
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        opacity: 0.8;
+    }
+}
+
+/* Botón con efecto pulsante */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #00ff88;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #00ff88;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px #00ff88; }
+    50% { box-shadow: 0 0 25px #00ff88; }
+    100% { box-shadow: 0 0 10px #00ff88; }
+}body {
     margin: 0;
     padding: 0;
     background: url('tu-imagen-4k.jpg') no-repeat center center/cover;
